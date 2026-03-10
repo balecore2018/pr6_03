@@ -12,27 +12,27 @@
         android:id="@+id/et_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/background_search"
         android:hint="Поиск ..."
         android:paddingLeft="40dp"
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:layout_margin="10dp"
         android:textColor="@color/black"
         android:textColorHint="#ACB8C5"
-        app:layout_constaintEnd_toEndOf="parent"
-        app:layout_constaintStart_toStartOf="parent"
-        app:layout_constaintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="9dp" />
 
     <ImageView
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:src="@drawable/ic_search"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="25dp"
-        app:layout_constaintStart_toStartOf="parent"
-        app:layout_constaintTop_toTopOf="parent"/>
+        android:layout_marginTop="65dp"
+        android:layout_marginLeft="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ScrollView
         android:id="@+id/scrollView2"

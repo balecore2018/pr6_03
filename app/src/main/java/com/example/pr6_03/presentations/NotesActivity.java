@@ -2,6 +2,7 @@ package com.example.pr6_03.presentations;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -37,7 +38,7 @@ public class NotesActivity extends AppCompatActivity {
         etSearch = findViewById(R.id.et_search);
 
         bthAddNotes.setOnClickListener(v -> {
-            Intent intentActivityNote = new Intent(this, NotesActivity.class);
+            Intent intentActivityNote = new Intent(this, NoteActivity.class);
             startActivity(intentActivityNote);
         });
 
@@ -76,7 +77,7 @@ public class NotesActivity extends AppCompatActivity {
 
     View.OnKeyListener SearchListner = new View.OnKeyListener() {
         @Override
-        public boolean onKey(View v, int keyCode, keyEvent event){
+        public boolean onKey(View v, int keyCode, KeyEvent event){
             String Search = etSearch.getText().toString();
             ArrayList<Note> FindNotes = RepoNotes.Notes.stream().filter(
                     item -> item.text.contains(Search)

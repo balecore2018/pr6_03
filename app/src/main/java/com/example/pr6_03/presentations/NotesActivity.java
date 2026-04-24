@@ -9,11 +9,7 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.pr6_03.R;
 import com.example.pr6_03.datas.RepoNotes;
@@ -68,8 +64,9 @@ public class NotesActivity extends AppCompatActivity {
             int Position = i;
 
             item_notes.setOnClickListener(v -> {
-                Intent intentActivityNote = new Intent(this, NotesActivity.class);
+                Intent intentActivityNote = new Intent(this, NoteActivity.class);
                 intentActivityNote.putExtra("position", Position);
+                startActivity(intentActivityNote);
             });
             itemsParent.addView(item_notes);
         }

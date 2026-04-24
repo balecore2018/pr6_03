@@ -53,6 +53,10 @@ public class NoteActivity extends AppCompatActivity {
         tvDate.setText("Отредактированно: " + FormatForDateNow.format(DateNow));
 
         bthSelectColor.setOnClickListener(v -> {
+            Toast.makeText(this, "Выбор цвета недоступен", Toast.LENGTH_SHORT).show();
+        });
+
+        bthBack.setOnClickListener(v -> {
             String Title = etTitle.getText().toString();
             String Text = etText.getText().toString();
 
@@ -76,7 +80,6 @@ public class NoteActivity extends AppCompatActivity {
 
         bthTrash.setOnClickListener(v -> {
             RepoNotes.Notes.remove(note);
-            finish();
             Toast.makeText(this,"Заметка удалена", Toast.LENGTH_SHORT).show();
         });
     }

@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pr6_03.R;
+import com.example.pr6_03.datas.DbContext;
+import com.example.pr6_03.datas.NotesContext;
 import com.example.pr6_03.datas.RepoNotes;
 import com.example.pr6_03.domains.Note;
 
@@ -23,6 +25,8 @@ public class NotesActivity extends AppCompatActivity {
     GridLayout itemsParent;
     View bthAddNotes;
     EditText etSearch;
+
+    DbContext dbContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +43,15 @@ public class NotesActivity extends AppCompatActivity {
         });
 
         etSearch.setOnKeyListener(SearchListner);
-        LoadNotes(RepoNotes.Notes);
+
+        dbContext = new DbContext(this);
+        LoadNotes(NotesContext.AllNotes());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        LoadNotes(RepoNotes.Notes);
+        LoadNotes(NotesContext.AllNotes());
     }
 
     public void LoadNotes(ArrayList<Note> notes){
@@ -76,7 +82,7 @@ public class NotesActivity extends AppCompatActivity {
         @Override
         public boolean onKey(View v, int keyCode, KeyEvent event){
             String Search = etSearch.getText().toString();
-            ArrayList<Note> FindNotes = RepoNotes.Notes.stream().filter(
+            ArrayList<Note> FindNotes = NotesContext.AllNotes().stream().filter(
                     item -> item.text.contains(Search)
             ).collect(Collectors.toCollection(ArrayList::new));
 

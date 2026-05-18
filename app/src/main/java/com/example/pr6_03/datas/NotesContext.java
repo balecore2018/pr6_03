@@ -13,6 +13,7 @@ public class NotesContext {
         Cursor cursor = DbContext.sqLiteDatabase.query("Notes", null, null, null, null, null, null);
 
         if(cursor.moveToFirst() == false) {
+            cursor.close();
             return allNotes;
         }
         do {

@@ -13,7 +13,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.pr6_03.R;
-import com.example.pr6_03.datas.RepoNotes;
+import com.example.pr6_03.datas.DbContext;
+import com.example.pr6_03.datas.NotesContext;
 import com.example.pr6_03.domains.Note;
 
 import java.text.SimpleDateFormat;
@@ -40,11 +41,16 @@ public class NoteActivity extends AppCompatActivity {
         etTitle = findViewById(R.id.et_title);
         etText = findViewById(R.id.et_text);
         tvDate = findViewById(R.id.tv_date);
+        new DbContext(this);
 
         Bundle arguments = getIntent().getExtras();
-        if(arguments != null){
-            int Position = arguments.getInt("position");
-            note = RepoNotes.Notes.get(Position);
+        if(arguments != null && arguments.containsKey("id")){
+            note = new Note();
+            note.id = arguments.getInt("id");
+            note.title = arguments.getString("title");
+            note.text = arguments.getString("text");
+            note.date = arguments.getString("date");
+            note.color = arguments.getString("color");
             etTitle.setText(note.title);
             etText.setText(note.text);
         } else {
@@ -67,19 +73,23 @@ public class NoteActivity extends AppCompatActivity {
                     .isEmpty()){
                 Toast.makeText(this, "Не чего сохранять", Toast.LENGTH_SHORT).show();
             } else {
+                boolean update = note != null && note.id > 0;
                 if(note == null){
                     note = new Note();
-                    RepoNotes.Notes.add(note);
                 }
                 note.title = Title;
                 note.text = Text;
                 note.date = FormatForDateNow.format(DateNow);
+                NotesContext.Save(note, update);
             }
             finish();
         });
 
         bthTrash.setOnClickListener(v -> {
-            RepoNotes.Notes.remove(note);
+            if(note != null && note.id > 0){
+                NotesContext.Delete(note);
+                finish();
+            }
             Toast.makeText(this,"Заметка удалена", Toast.LENGTH_SHORT).show();
         });
     }
